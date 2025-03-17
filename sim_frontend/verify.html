@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Signature - VeriSign Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/verify.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">VeriSign Pro: Advanced AI Driven Signature Verification System</div>
+        <ul class="navbar-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('signtool') }}">SignTool</a></li>
+            {% if 'user' in session %}
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="verify-container">
+        <h1 class="verify-heading">Verify Signature</h1>
+        <form action="/verify" method="post" enctype="multipart/form-data" class="verify-form" id="verifyForm">
+            <label for="customerID">Customer ID:</label>
+            <input type="text" id="customerID" name="customerID" required><br><br>
+
+            <label for="newSignature">New Signature Image:</label>
+            <input type="file" id="newSignature" name="newSignature" accept="image/*" required onchange="previewImage(event)"><br><br>
+
+            <div id="imagePreviewContainer" style="display:none;">
+                <h3>Image Preview:</h3>
+                <img id="imagePreview" src="" alt="Image preview" style="max-width: 100%; border-radius: 8px; margin-top: 15px;">
+            </div>
+
+            <button type="button" onclick="verifySignature()">Verify</button>
+        </form>
+
+        <div id="resultContainer" style="display:none; margin-top: 20px;">
+            <h2>Result</h2>
+            <p><strong>Signature Threshold:</strong> <span id="threshold"></span></p>
+            <p><strong>Image Distance:</strong> <span id="imageDistance"></span></p>
+            <p id="authenticity" style="font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                document.getElementById("imagePreview").src = e.target.result;
+                document.getElementById("imagePreviewContainer").style.display = "block";
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        async function verifySignature() {
+            const form = document.getElementById('verifyForm');
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('/verify', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+
+                document.getElementById('threshold').innerText = result.threshold;
+                document.getElementById('imageDistance').innerText = result.distance;
+                document.getElementById('authenticity').innerText = result.match
+                    ? "Signature is authentic"
+                    : "Signature is forged";
+
+                document.getElementById('authenticity').style.color = result.match ? "green" : "red";
+                document.getElementById('resultContainer').style.display = "block";
+
+            } catch (error) {
+                console.error('Verification error:', error);
+            }
+        }
+    </script>
+</body>
+</html>

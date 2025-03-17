@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Tool - VeriSign Pro</title>
+    <link rel="stylesheet" href="static/css/global.css">
+    <link rel="stylesheet" href="static/css/signtool.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">VeriSign Pro: Advanced AI Driven Signature Verification System</div>
+        <ul class="navbar-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('signtool') }}">SignTool</a></li>
+            {% if 'user' in session %}
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="verisign-container">
+        <button class="verisign-button" onclick="goToAddSignature()">Add New User Signature</button>
+        <button class="verisign-button" onclick="goToVerifySignature()">Verify Signature</button>
+    </div>
+
+    <script>
+        function goToAddSignature() {
+            window.location.href = "{{ url_for('upload') }}";
+        }
+        function goToVerifySignature() {
+            window.location.href = "{{ url_for('verify') }}";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+/* verisign.css */
+
+/* Container for buttons */
+.verisign-container {
+    width: 90%;
+    max-width: 400px;
+    padding: 40px 20px;
+    margin: 150px auto; /* Center below the navbar */
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Button styles for the VeriSign page */
+  .verisign-button {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .verisign-button:hover {
+    background-color: #0056b3;
+  }
+  

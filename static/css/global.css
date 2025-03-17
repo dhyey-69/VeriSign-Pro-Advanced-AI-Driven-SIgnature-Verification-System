@@ -1,0 +1,79 @@
+/* global.css */
+
+/* Universal Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body, html {
+    height: 100%;
+    overflow: auto; /* Allow scrolling */
+    background: linear-gradient(120deg, #ff6f61, #6a11cb, #2575fc);
+    background-size: 300% 300%;
+    animation: gradientAnimation 8s ease infinite;
+}
+  
+  /* Gradient Background Animation */
+  @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  /* Navbar Styles */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    color: #fff;
+    z-index: 10;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .navbar-links {
+    list-style: none;
+    display: flex;
+  }
+  
+  .navbar-links li {
+    margin: 0 15px;
+  }
+  
+  .navbar-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  .navbar-links a:hover {
+    color: #ddd;
+  }
+  
+  /* Button Styling */
+  button {
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #28a745;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #218838;
+  }
+  

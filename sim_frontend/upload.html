@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Signatures - VeriSign Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">VeriSign Pro: Advanced AI Driven Signature Verification System</div>
+        <ul class="navbar-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('signtool') }}">SignTool</a></li>
+            {% if 'user' in session %}
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert-container">
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="upload-container">
+        <h1>Upload Signature Images</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data" class="upload-form">
+            <label for="customerID">Customer ID:</label>
+            <input type="text" id="customerID" name="customerID" required><br><br>
+
+            <label for="uploadedImage1">Signature Image 1:</label>
+            <input type="file" id="uploadedImage1" name="uploadedImage1" accept="image/*" onchange="previewImage(event, 'imagePreview1')" required><br><br>
+            <div id="imagePreviewContainer1" class="image-preview-container" style="display:none;">
+                <h3>Preview Image 1:</h3>
+                <img id="imagePreview1" src="" alt="Image preview" class="image-preview">
+            </div>
+
+            <label for="uploadedImage2">Signature Image 2:</label>
+            <input type="file" id="uploadedImage2" name="uploadedImage2" accept="image/*" onchange="previewImage(event, 'imagePreview2')" required><br><br>
+            <div id="imagePreviewContainer2" class="image-preview-container" style="display:none;">
+                <h3>Preview Image 2:</h3>
+                <img id="imagePreview2" src="" alt="Image preview" class="image-preview">
+            </div>
+
+            <label for="uploadedImage3">Signature Image 3:</label>
+            <input type="file" id="uploadedImage3" name="uploadedImage3" accept="image/*" onchange="previewImage(event, 'imagePreview3')" required><br><br>
+            <div id="imagePreviewContainer3" class="image-preview-container" style="display:none;">
+                <h3>Preview Image 3:</h3>
+                <img id="imagePreview3" src="" alt="Image preview" class="image-preview">
+            </div>
+
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <script>
+        function previewImage(event, previewId) {
+            const file = event.target.files[0];  // Get the file
+            const reader = new FileReader();  // Create a FileReader instance
+            
+            reader.onload = function(e) {
+                const imagePreview = document.getElementById(previewId);  // Get the preview image element
+                const imagePreviewContainer = document.getElementById('imagePreviewContainer' + previewId.charAt(previewId.length - 1));  // Get the corresponding image preview container
+                imagePreview.src = e.target.result;  // Set the source of the preview image
+                imagePreviewContainer.style.display = "block";  // Show the preview container
+            }
+            
+            if (file) {
+                reader.readAsDataURL(file);  // Read the file as a Data URL
+            }
+        }
+    </script>
+
+    <style>
+        .alert-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .alert {
+            padding: 10px 20px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+        }
+
+        .alert.success {
+            background-color: #28a745;
+        }
+
+        .alert.error {
+            background-color: #dc3545;
+        }
+    </style>
+</body>
+</html>

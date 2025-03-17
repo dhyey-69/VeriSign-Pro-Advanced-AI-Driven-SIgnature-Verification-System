@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About VeriSign Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about-us.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">VeriSign Pro: Advanced AI Driven Signature Verification System</div>
+        <ul class="navbar-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('signtool') }}">SignTool</a></li>
+            {% if 'user' in session %}
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="about-container">
+        <h1>About VeriSign</h1>
+        <div class="about-content">
+            <h2>Who We Are</h2>
+            <p>
+                VeriSign is an innovative project aimed at enhancing document security through advanced signature verification technology. 
+                Our system leverages state-of-the-art machine learning algorithms to authenticate and verify handwritten signatures, ensuring 
+                the integrity and validity of digital and physical documents.
+            </p>
+
+            <h2>Our Mission</h2>
+            <p>
+                Our mission is to provide businesses, institutions, and individuals with a reliable, fast, and accurate signature verification tool. 
+                We aim to combat fraudulent activities by developing a robust verification system that identifies and differentiates between genuine 
+                and forged signatures.
+            </p>
+
+            <h2>Our Vision</h2>
+            <p>
+                We envision a future where signature verification is streamlined and integrated into various sectors, from banking and legal documentation 
+                to educational and corporate environments. By providing an accessible, high-accuracy solution, we aim to become a global leader in digital 
+                security and authentication.
+            </p>
+
+            <h2>Why Choose VeriSign?</h2>
+            <p>
+                At VeriSign, we prioritize accuracy, reliability, and user-friendliness. Our system is designed to be adaptable across various platforms 
+                and use cases, ensuring smooth integration into existing workflows. With real-time results and high precision, VeriSign is your go-to 
+                solution for safeguarding signature-based verification processes.
+            </p>
+
+            <h2>Our Technology</h2>
+            <p>
+                VeriSign uses advanced machine learning models trained on large datasets of genuine and forged signatures. Our algorithms analyze 
+                the unique characteristics of each signature, including stroke patterns, pressure points, and spatial relationships, to determine 
+                authenticity. By continuously improving our technology, we ensure that VeriSign remains at the cutting edge of signature verification.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - VeriSign Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">VeriSign Pro: Advanced AI Driven Signature Verification System</div>
+        <ul class="navbar-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('signtool') }}">SignTool</a></li>
+            {% if 'user' in session %}
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+            {% endif %}
+            <li><a href="{{ url_for('about_us') }}">About Us</a></li>
+            <li><a href="{{ url_for('contact_us') }}">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <div class="home-container">
+        <div class="home-left">
+            <h1>Welcome to VeriSign</h1>
+            <p>
+                Welcome to our Minor Project: VeriSign. This project focuses on verifying handwritten signatures using modern image processing techniques.
+                You can upload a signature for verification and compare it with stored samples to validate authenticity. Explore our tool to learn more.
+            </p>
+            <button class="home-button" onclick="goToVeriSignPage()">Start Verification</button>
+        </div>
+        
+        <div class="home-right">
+            <img src="{{ url_for('static', filename='images/sign.jpeg') }}" alt="Welcome to VeriSign" class="welcome-image">
+        </div>
+    </div>
+
+    <script>
+        function goToVeriSignPage() {
+            window.location.href = "{{ url_for('signtool') }}";
+        }
+    </script>
+</body>
+</html>

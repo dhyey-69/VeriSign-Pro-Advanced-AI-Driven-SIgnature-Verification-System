@@ -1,0 +1,65 @@
+/* Verify Signature Page Specific Styles */
+.verify-container {
+    width: 90%;
+    max-width: 600px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 100px; /* This centers vertically with respect to the page */
+    margin-left: auto;
+    margin-right: auto; /* Ensures the container is centered horizontally */
+}
+
+.verify-heading {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.verify-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.verify-form label {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.verify-form input[type="text"], 
+.verify-form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.verify-form button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #28a745;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.verify-form button:hover {
+    background-color: #218838;
+}
+
+#imagePreview {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 15px;
+}
